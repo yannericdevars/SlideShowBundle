@@ -1,0 +1,12 @@
+dw_slide_show_homepage:
+    pattern:  /boutique/{ref}
+    defaults: { _controller: DWSlideShowBundle:Default:boutique }
+    
+DWSlideShowBundle_item:
+    resource: "@DWSlideShowBundle/Resources/config/routing/item.yml"
+    prefix:   /item
+    
+DWSlideShowBundle_image:
+    resource: "@DWSlideShowBundle/Resources/config/routing/image.yml"
+    prefix:   /image
+

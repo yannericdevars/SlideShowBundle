@@ -1,0 +1,7 @@
+parameters:
+#    dw_slide_show.example.class: DW\SlideShowBundle\Example
+
+services:
+#    dw_slide_show.example:
+#        class: %dw_slide_show.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

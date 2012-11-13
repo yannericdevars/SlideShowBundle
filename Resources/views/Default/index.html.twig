@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta content="charset=utf-8">
+	<title>Boutique</title>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	
+  <!-- Syntax Highlighter -->
+	<link href="{{ asset('bundles/dwslideshow/css/shCore.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/dwslideshow/css/shThemeDefault.css')}}" rel="stylesheet" type="text/css" />
+  <!-- Demo CSS -->
+	<link rel="stylesheet" href="{{ asset('bundles/dwslideshow/css/demo.css')}}" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ asset('bundles/dwslideshow/css/flexslider.css')}}" type="text/css" media="screen" />
+	
+	<!-- Modernizr -->
+  <script src="{{ asset('bundles/dwslideshow/js/modernizr.js')}}"></script>
+  
+</head>
+<body class="loading">
+
+	<div id="top">
+		
+		
+	
+	</div>
+  
+  <div id="container" class="cf">
+    <header role="navigation">
+        {% if element is defined %}
+            <h1>{{ element.name }}</h1><br/>
+            <h2>{{ element.definitionShort }}</h2><br/>
+            <h2>{{ element.definition }}</h2><br/>
+            <h3>{{ element.ref }}</h3><br/>
+       {% endif %}
+    
+
+    </header>
+
+	<div id="main" role="main">
+      <section class="slider">
+        <div id="slider" class="flexslider">
+          <ul class="slides">
+              {% if images is defined %}
+                {% for img in images %}
+                    <li>
+                      <img src="{{ asset('shop_imgs/')}}{{ img.link }}" />
+                    </li>
+                {% endfor %}  
+              {% endif %}
+            
+        
+          </ul>
+        </div>
+        <div id="carousel" class="flexslider">
+          <ul class="slides">
+              {% if images is defined %}
+                {% for img in images %}
+                        <li>
+                          <img src="{{ asset('shop_imgs/')}}{{ img.link }}" />
+                        </li>
+                {% endfor %}
+              {% endif %}
+          
+          </ul>
+        </div>
+      </section>
+      <aside>
+        <div class="cf">
+        
+        </div>
+        <div id="view-js" class="code">
+          
+        </div>
+        <div id="view-html" class="code">
+         
+        </div>
+      </aside>
+    </div>
+  
+  </div>
+  
+  <!-- jQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+  
+  <!-- FlexSlider -->
+  <script defer src="{{ asset('bundles/dwslideshow/js/jquery.flexslider.js')}}"></script>
+  
+  <script type="text/javascript">
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('#carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 210,
+        itemMargin: 5,
+        asNavFor: '#slider'
+      });
+      
+      $('#slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#carousel",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+
+
+  <!-- Syntax Highlighter -->
+  <script type="text/javascript" src="{{ asset('bundles/dwslideshow/js/shCore.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/dwslideshow/js/shBrushXml.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/dwslideshow/js/shBrushJScript.js')}}"></script>
+  
+  <!-- Optional FlexSlider Additions -->
+  <script src="{{ asset('bundles/dwslideshow/js/jquery.easing.js')}}"></script>
+  <script src="{{ asset('bundles/dwslideshow/js/jquery.mousewheel.js')}}"></script>
+  <script defer src="{{ asset('bundles/dwslideshow/js/demo.js')}}"></script>
+  
+</body>
+</html>

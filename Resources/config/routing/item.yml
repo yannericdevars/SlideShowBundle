@@ -1,0 +1,30 @@
+item:
+    pattern:  /
+    defaults: { _controller: "DWSlideShowBundle:Item:index" }
+
+item_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DWSlideShowBundle:Item:show" }
+
+item_new:
+    pattern:  /new
+    defaults: { _controller: "DWSlideShowBundle:Item:new" }
+
+item_create:
+    pattern:  /create
+    defaults: { _controller: "DWSlideShowBundle:Item:create" }
+    requirements: { _method: post }
+
+item_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DWSlideShowBundle:Item:edit" }
+
+item_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DWSlideShowBundle:Item:update" }
+    requirements: { _method: post }
+
+item_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DWSlideShowBundle:Item:delete" }
+    requirements: { _method: post }
