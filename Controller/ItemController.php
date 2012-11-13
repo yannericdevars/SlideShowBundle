@@ -21,7 +21,7 @@ class ItemController extends Controller
      */
     public function indexAction()
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $em = $this->getDoctrine()->getManager();
 
@@ -38,7 +38,7 @@ class ItemController extends Controller
      */
     public function showAction($id)
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $em = $this->getDoctrine()->getManager();
 
@@ -61,7 +61,7 @@ class ItemController extends Controller
      */
     public function newAction()
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $entity = new Item();
         $form   = $this->createForm(new ItemType(), $entity);
@@ -78,7 +78,7 @@ class ItemController extends Controller
      */
     public function createAction(Request $request)
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $entity  = new Item();
         $form = $this->createForm(new ItemType(), $entity);
@@ -104,7 +104,7 @@ class ItemController extends Controller
      */
     public function editAction($id)
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $em = $this->getDoctrine()->getManager();
 
@@ -130,7 +130,7 @@ class ItemController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $em = $this->getDoctrine()->getManager();
 
@@ -164,7 +164,7 @@ class ItemController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         $form = $this->createDeleteForm($id);
         $form->bind($request);
@@ -186,7 +186,7 @@ class ItemController extends Controller
 
     private function createDeleteForm($id)
     {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
         
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')

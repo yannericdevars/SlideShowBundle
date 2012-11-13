@@ -45,34 +45,27 @@ class DefaultController extends Controller
             
             $user_log = $this->getDoctrine()->getRepository('DWUserBundle:User')->findOneBy(array ('username' => $user->getUsername(), 'encrypted_password' => $encoded_password));
             
-            $is_admin = false;
+            $t_roles = array();
             
             if (is_object($user_log))
             {
                 foreach ($user_log->getRoles() as $role)
                 {
-                    if ($role->getName() == 'ADMIN')
-                        $is_admin = true;
+                    $t_roles[] = $role->getName();
+//                    if ($role->getName() == 'ADMIN')
+//                        $is_admin = true;
                 }
             }
            
             
-            if (is_object($user_log) && $is_admin)
+            if (is_object($user_log))
             {
-                if (is_null($this->getRequest()->getSession()->get('userAutentif')) && $is_admin)
-                {
-                    $this->getRequest()->getSession()->set('userAutentif', true);
-                }   
-                else if ($this->getRequest()->getSession()->get('userAutentif') === false && $is_admin)
-                {
-                    $this->getRequest()->getSession()->set('userAutentif', true);
-                }
-                    
+                    $this->getRequest()->getSession()->set('userAutentif', $t_roles);
                 
             }
             else 
             {
-               $this->getRequest()->getSession()->set('userAutentif', false);
+               $this->getRequest()->getSession()->set('userAutentif', null);
             }
         }
         
