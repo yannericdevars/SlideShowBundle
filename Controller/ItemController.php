@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use DW\SlideShowBundle\Entity\Item;
 use DW\SlideShowBundle\Form\ItemType;
+use \DW\UserBundle\Service\UserService;
 
 /**
  * Item controller.
@@ -20,6 +21,8 @@ class ItemController extends Controller
      */
     public function indexAction()
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DWSlideShowBundle:Item')->findAll();
@@ -35,6 +38,8 @@ class ItemController extends Controller
      */
     public function showAction($id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Item')->find($id);
@@ -56,6 +61,8 @@ class ItemController extends Controller
      */
     public function newAction()
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $entity = new Item();
         $form   = $this->createForm(new ItemType(), $entity);
 
@@ -71,6 +78,8 @@ class ItemController extends Controller
      */
     public function createAction(Request $request)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $entity  = new Item();
         $form = $this->createForm(new ItemType(), $entity);
         $form->bind($request);
@@ -95,6 +104,8 @@ class ItemController extends Controller
      */
     public function editAction($id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Item')->find($id);
@@ -119,6 +130,8 @@ class ItemController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Item')->find($id);
@@ -151,6 +164,8 @@ class ItemController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -171,6 +186,8 @@ class ItemController extends Controller
 
     private function createDeleteForm($id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm()

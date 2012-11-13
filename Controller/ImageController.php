@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use DW\SlideShowBundle\Entity\Image;
 use DW\SlideShowBundle\Form\ImageType;
+use \DW\UserBundle\Service\UserService;
 
 /**
  * Image controller.
@@ -19,7 +20,9 @@ class ImageController extends Controller
      *
      */
     public function indexAction()
-    {
+    { 
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DWSlideShowBundle:Image')->findAll();
@@ -35,6 +38,8 @@ class ImageController extends Controller
      */
     public function showAction($id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Image')->find($id);
@@ -56,6 +61,8 @@ class ImageController extends Controller
      */
     public function newAction()
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $entity = new Image();
         $form   = $this->createForm(new ImageType(), $entity);
 
@@ -71,6 +78,8 @@ class ImageController extends Controller
      */
     public function createAction(Request $request)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $entity  = new Image();
         $form = $this->createForm(new ImageType(), $entity);
         $form->bind($request);
@@ -101,6 +110,8 @@ class ImageController extends Controller
      */
     public function editAction($id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Image')->find($id);
@@ -125,6 +136,8 @@ class ImageController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Image')->find($id);
@@ -157,6 +170,8 @@ class ImageController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -177,6 +192,8 @@ class ImageController extends Controller
 
     private function createDeleteForm($id)
     {
+        UserService::verify($this->getRequest()->getSession()->get('userAutentif'));
+        
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm()
