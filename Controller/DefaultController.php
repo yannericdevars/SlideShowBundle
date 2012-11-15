@@ -52,8 +52,6 @@ class DefaultController extends Controller
                 foreach ($user_log->getRoles() as $role)
                 {
                     $t_roles[] = $role->getName();
-//                    if ($role->getName() == 'ADMIN')
-//                        $is_admin = true;
                 }
             }
            

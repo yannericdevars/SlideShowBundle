@@ -4,42 +4,42 @@ namespace DW\SlideShowBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use DW\SlideShowBundle\Entity\Item;
 use DW\SlideShowBundle\Form\ItemType;
-use \DW\UserBundle\Service\UserService;
 
 /**
  * Item controller.
  *
  */
-class ItemController extends Controller
-{
+class ItemController extends Controller {
+
     /**
      * Lists all Item entities.
      *
      */
-    public function indexAction()
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    public function indexAction() {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DWSlideShowBundle:Item')->findAll();
 
         return $this->render('DWSlideShowBundle:Item:index.html.twig', array(
-            'entities' => $entities,
-        ));
+                    'entities' => $entities,
+                ));
     }
 
     /**
      * Finds and displays a Item entity.
      *
      */
-    public function showAction($id)
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    public function showAction($id) {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Item')->find($id);
@@ -51,36 +51,38 @@ class ItemController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('DWSlideShowBundle:Item:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),));
     }
 
     /**
      * Displays a form to create a new Item entity.
      *
      */
-    public function newAction()
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    public function newAction() {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
         $entity = new Item();
-        $form   = $this->createForm(new ItemType(), $entity);
+        $form = $this->createForm(new ItemType(), $entity);
 
         return $this->render('DWSlideShowBundle:Item:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+                ));
     }
 
     /**
      * Creates a new Item entity.
      *
      */
-    public function createAction(Request $request)
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
-        $entity  = new Item();
+    public function createAction(Request $request) {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
+        $entity = new Item();
         $form = $this->createForm(new ItemType(), $entity);
         $form->bind($request);
 
@@ -93,19 +95,19 @@ class ItemController extends Controller
         }
 
         return $this->render('DWSlideShowBundle:Item:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+                ));
     }
 
     /**
      * Displays a form to edit an existing Item entity.
      *
      */
-    public function editAction($id)
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    public function editAction($id) {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Item')->find($id);
@@ -118,20 +120,21 @@ class ItemController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('DWSlideShowBundle:Item:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Edits an existing Item entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    public function updateAction(Request $request, $id) {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DWSlideShowBundle:Item')->find($id);
@@ -152,20 +155,21 @@ class ItemController extends Controller
         }
 
         return $this->render('DWSlideShowBundle:Item:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Deletes a Item entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    public function deleteAction(Request $request, $id) {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -184,13 +188,15 @@ class ItemController extends Controller
         return $this->redirect($this->generateUrl('item'));
     }
 
-    private function createDeleteForm($id)
-    {
-        UserService::verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
-        
+    private function createDeleteForm($id) {
+        $userService = $this->get("userService");
+        $userService->verify($this->getRequest()->getSession()->get('userAutentif'), array('ADMIN'));
+
+
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
 }
