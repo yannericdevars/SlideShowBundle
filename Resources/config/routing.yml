@@ -10,8 +10,6 @@ DWSlideShowBundle_image:
     resource: "@DWSlideShowBundle/Resources/config/routing/image.yml"
     prefix:   /image
     
-dw_slide_show_login:
-    pattern:  /login
-    defaults: { _controller: DWSlideShowBundle:Default:login }
+
     
 
